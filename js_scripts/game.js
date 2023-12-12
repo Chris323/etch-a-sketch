@@ -3,6 +3,15 @@ let sizeOfGrid = 16;
 const container = document.querySelector(".container");
 const resetButton = document.querySelector("button");
 
+//RGB function
+const createRandomRgb = () => {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+
+  return { r, g, b };
+};
+
 //Create Grid
 const createGrid = (dimensions) => {
   const wrapper = document.createElement("div");
@@ -13,6 +22,8 @@ const createGrid = (dimensions) => {
     row.classList.add("grid-row");
 
     for (let j = 0; j < dimensions; j++) {
+        //Random RGB using destructing
+      const { r, g, b } = createRandomRgb();
       const widthAndHeight = 960 / dimensions;
       const gridBox = document.createElement("div");
       gridBox.classList.add("grid-box");
@@ -20,7 +31,16 @@ const createGrid = (dimensions) => {
       gridBox.style.height = `${widthAndHeight}px`;
       //Mouse hover event
       gridBox.addEventListener("mouseenter", () => {
-        gridBox.style.backgroundColor = "black";
+        //console.log("HI");
+        const bgColor = "rgb(" + r + "," + g + "," + b + ")";
+        gridBox.style.background = bgColor;
+        const currentOpacity = gridBox.style.opacity;
+        if(currentOpacity){
+            gridBox.style.opacity = Number(currentOpacity) + .1
+        }
+        else{
+            gridBox.style.opacity = .1;
+        }
       });
 
       //Below appendChild puts element INSIDE row div
