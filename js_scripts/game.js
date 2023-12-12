@@ -13,11 +13,18 @@ const createGrid = (dimensions) => {
       gridBox.classList.add("grid-box");
       gridBox.style.width = `${widthAndHeight}px`;
       gridBox.style.height = `${widthAndHeight}px`;
+
+      gridBox.addEventListener('mouseenter', () => {
+        gridBox.style.backgroundColor = 'black';
+      })  
+
       //Below appendChild puts element INSIDE row div
       row.appendChild(gridBox);
     }
     container.appendChild(row);
   }
 };
+
+
 
 createGrid(sizeOfGrid);
